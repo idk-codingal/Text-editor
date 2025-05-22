@@ -21,17 +21,14 @@ def open_file():
         window.title(f"Best text editor")
 
 def save_file():
-    """save a file"""
     filepath = asksaveasfilename(defaultextension= "txt", filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")])
     if not filepath:
         return
-    txt_edit.delete(1.0, END)
 
     with open(filepath, "w") as output_file:
-        text = output_file.read()
-        txt_edit.insert(END, text)
-        output_file.close()
-        window.title(f"Best text editor - {filepath}")
+        text = txt_edit.get(1.0, END)
+        output_file.write(text)
+    window.title(f"Best text editor - {filepath}")
 
 txt_edit = Text(window)
 fr_buttons = Frame(window, relief=RAISED, bd=2)
